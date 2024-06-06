@@ -8,6 +8,7 @@ import { 	FIRST_CONSUMER_GROUP_ID,
 	SECOND_TOPIC} from './constants';
 import { messageProcessor } from './messageProcessor';
 import { spawnConsumer } from './spawnConsumer';
+import { produceMessages } from './produceMessages';
 
 const kafka = new Kafka({
   clientId: 'my-app',
@@ -46,3 +47,6 @@ for (
 ) {
 	spawnConsumer(kafka, messageProcessor, SECOND_CONSUMER_GROUP_ID, SECOND_TOPIC)
 }
+
+const producer = kafka.producer();
+produceMessages(producer);
