@@ -2,7 +2,7 @@ import { Kafka } from "kafkajs";
 
 export async function spawnConsumer(
   kafka: Kafka,
-  messageProcessor: (kafkaMessage) => void,
+  messageProcessor: (kafkaMessage: any) => void,
   groupId: string,
   topic: string
 ) {
@@ -36,7 +36,7 @@ export async function spawnConsumer(
       partitionsConsumedConcurrently: 1,
       autoCommit: false,
       eachMessage: async ({ message, partition }) => {
-        const kafkaMessage = JSON.parse(
+        const kafkaMessage: any = JSON.parse(
           message.value!.toString()
         );
 
